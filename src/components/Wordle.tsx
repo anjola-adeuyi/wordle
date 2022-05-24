@@ -16,7 +16,7 @@ const Wordle = ({ solution }: WordleProps) => {
     };
   }, [handlekeyup]);
 
-  return <div>Wordle</div>;
+  return <div>Current guess - {currentGuess}</div>;
 };
 
 export default Wordle;
