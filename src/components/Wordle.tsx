@@ -8,7 +8,7 @@ interface WordleProps {
 }
 
 const Wordle = ({ solution }: WordleProps) => {
-  const { currentGuess, handlekeyup, guesses, isCorrect, turn } =
+  const { currentGuess, handlekeyup, guesses, isCorrect, turn, usedKeys } =
     useWordle(solution);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Wordle = ({ solution }: WordleProps) => {
       <div>solution - {solution}</div>
       <div>Current guess - {currentGuess}</div>
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
-      <Keypad />
+      <Keypad usedKeys={usedKeys} />
     </>
   );
 };

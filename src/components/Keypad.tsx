@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
+interface KeypadProps {
+  usedKeys: Record<any, string>;
+}
+
 interface TLetter {
   key: string;
 }
 
-const Keypad = () => {
+const Keypad = ({ usedKeys }: KeypadProps) => {
   const [letters, setLetters] = useState<TLetter[]>([]);
 
   useEffect(() => {
@@ -22,7 +26,12 @@ const Keypad = () => {
     <div className='keypad'>
       {letters &&
         letters.map((letter) => {
-          return <div key={letter.key}>{letter.key}</div>;
+          const color = usedKeys[letter.key];
+          return (
+            <div key={letter.key} className={color}>
+              {letter.key}
+            </div>
+          );
         })}
     </div>
   );
