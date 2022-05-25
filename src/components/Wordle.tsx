@@ -14,10 +14,20 @@ const Wordle = ({ solution }: WordleProps) => {
   useEffect(() => {
     window.addEventListener('keyup', handlekeyup);
 
+    if (isCorrect) {
+      console.log('congrats you win!');
+      window.removeEventListener('keyup', handlekeyup);
+    }
+
+    if (turn > 5) {
+      console.log('you lose!');
+      window.removeEventListener('keyup', handlekeyup);
+    }
+
     return () => {
       window.removeEventListener('keyup', handlekeyup);
     };
-  }, [handlekeyup]);
+  }, [handlekeyup, isCorrect]);
 
   useEffect(() => {
     console.log(guesses, turn, isCorrect);
