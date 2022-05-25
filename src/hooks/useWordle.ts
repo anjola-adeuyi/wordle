@@ -11,6 +11,35 @@ const useWordle = (solution: string) => {
   // e.g. [{ key: 'a', color: 'yellow'}]
   const formatGuess = () => {
     console.log('formatting guesses', currentGuess);
+    console.log('solution', solution);
+
+    let solutionArray = solution.split('');
+    console.log('solutionarray', solutionArray);
+
+    let formattedGuess = currentGuess.split('').map((letter) => {
+      return { key: letter, color: 'grey' };
+    });
+    console.log('formatted guess', formattedGuess);
+
+    // find any green letters
+    formattedGuess.forEach((letter, index) => {
+      if (letter.key === solutionArray[index]) {
+        letter.color = 'green';
+        console.log(formattedGuess[index] === letter);
+        solutionArray[index] = ' ';
+      }
+    });
+
+    // find any yellow letters
+    formattedGuess.forEach((letter, index) => {
+      if (solutionArray.includes(letter.key) && letter.color !== 'green') {
+        letter.color = 'yellow';
+        console.log(formattedGuess[index] === letter);
+        solutionArray[solutionArray.indexOf(letter.key)] = ' ';
+      }
+    });
+
+    return formattedGuess;
   };
 
   // add a new guess to the guesses state
@@ -39,7 +68,7 @@ const useWordle = (solution: string) => {
         console.log('word must be 5 letters long');
         return;
       }
-      formatGuess();
+      const formattedGuess = formatGuess();
     }
 
     if (key === 'Backspace') {
