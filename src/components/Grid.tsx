@@ -3,7 +3,7 @@ import Row from './Row';
 
 interface GridProps {
   currentGuess: string;
-  guesses: string[];
+  guesses: any[];
   turn: number;
 }
 
@@ -11,7 +11,7 @@ const Grid = ({ currentGuess, guesses, turn }: GridProps) => {
   return (
     <div>
       {guesses.map((guess, index) => {
-        return <Row key={index} />;
+        return <Row key={index} guess={guess} />;
       })}
     </div>
   );
