@@ -6,7 +6,8 @@ interface WordleProps {
 }
 
 const Wordle = ({ solution }: WordleProps) => {
-  const { currentGuess, handlekeyup } = useWordle(solution);
+  const { currentGuess, handlekeyup, guesses, isCorrect, turn } =
+    useWordle(solution);
 
   useEffect(() => {
     window.addEventListener('keyup', handlekeyup);
@@ -15,6 +16,10 @@ const Wordle = ({ solution }: WordleProps) => {
       window.removeEventListener('keyup', handlekeyup);
     };
   }, [handlekeyup]);
+
+  useEffect(() => {
+    console.log(guesses, turn, isCorrect);
+  }, [guesses, turn, isCorrect]);
 
   return (
     <>
