@@ -5,7 +5,8 @@ function App() {
   const [solution, setSolution] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/solutions')
+    // fetch('http://localhost:5000/solutions')
+    fetch('https://anjola-adeuyi.github.io/wordle-api/solutions.json')
       .then((res) => res.json())
       .then((json) => {
         // random int btw 0 & 14

@@ -12,7 +12,8 @@ const Keypad = ({ usedKeys }: KeypadProps) => {
   const [letters, setLetters] = useState<TLetter[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/letters')
+    // fetch('http://localhost:5000/letters')
+    fetch('https://anjola-adeuyi.github.io/wordle-api/letters.json')
       .then((res) => res.json())
       .then((json) => {
         setLetters(json);
