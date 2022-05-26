@@ -62,7 +62,12 @@ const Wordle = ({ solution }: WordleProps) => {
         addNewGuess={addNewGuess}
       />
       {showModal && (
-        <Modal isCorrect={isCorrect} turn={turn} solution={solution} />
+        <Modal
+          isCorrect={isCorrect}
+          turn={turn}
+          solution={solution}
+          setShowModal={setShowModal}
+        />
       )}
     </>
   );

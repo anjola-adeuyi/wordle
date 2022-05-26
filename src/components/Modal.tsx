@@ -4,11 +4,20 @@ interface ModalProps {
   isCorrect: boolean;
   turn: number;
   solution: string;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Modal = ({ isCorrect, turn, solution }: ModalProps) => {
+const Modal = ({ isCorrect, turn, solution, setShowModal }: ModalProps) => {
   return (
     <div className='modal'>
+      <button
+        className='closeModal'
+        onClick={() => {
+          setShowModal(false);
+        }}
+      >
+        X
+      </button>
       {isCorrect && (
         <div>
           <h1>You win!</h1>
