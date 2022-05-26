@@ -60,6 +60,12 @@ const Keypad = ({
     addNewGuess(formattedGuess);
   };
 
+  const handleKeyPadDelete = () => {
+    setCurrentGuess((prev) => {
+      return prev.slice(0, -1);
+    });
+  };
+
   console.log(letters);
 
   return (
@@ -81,8 +87,13 @@ const Keypad = ({
             );
           })}
       </div>
-      <div className='enter' onClick={handleKeyPadEnter}>
-        Enter
+      <div>
+        <span className='delete' onClick={handleKeyPadDelete}>
+          Del
+        </span>
+        <span className='enter' onClick={handleKeyPadEnter}>
+          Enter
+        </span>
       </div>
     </>
   );

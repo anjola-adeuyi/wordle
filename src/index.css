@@ -82,7 +82,8 @@ h1 {
 }
 
 .keypad > div,
-.enter {
+.enter,
+.delete {
   margin: 5px;
   width: 40px;
   height: 50px;
@@ -97,6 +98,17 @@ h1 {
   width: 100px;
   height: 50px;
   background: #5ac85a;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2em;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete {
+  width: 100px;
+  height: 50px;
+  background: red;
   color: #fff;
   font-weight: bold;
   font-size: 1.2em;
