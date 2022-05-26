@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useWordle from '../hooks/useWordle';
 import Grid from './Grid';
 import Keypad from './Keypad';
@@ -6,31 +6,55 @@ import Modal from './Modal';
 
 interface WordleProps {
   solution: string;
+  setSolution: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const Wordle = ({ solution }: WordleProps) => {
+const DELAY = 2000;
+
+const Wordle = ({ solution, setSolution }: WordleProps) => {
   const {
     currentGuess,
     setCurrentGuess,
     handlekeyup,
     guesses,
+    setGuesses,
     isCorrect,
+    setIsCorrect,
     turn,
+    setTurn,
     usedKeys,
     history,
+    setHistory,
     formatGuess,
     addNewGuess,
   } = useWordle(solution);
   const [showModal, setShowModal] = useState(false);
+  const [loop, setLoop] = useState<NodeJS.Timer>();
+  const timer = useRef<NodeJS.Timer | NodeJS.Timeout>();
 
   useEffect(() => {
     window.addEventListener('keyup', handlekeyup);
 
+    // if (isCorrect) {
+    //   console.log('congrats you win!');
+    //   const interval = setTimeout(() => {
+    //     setShowModal(true);
+    //   }, 2000);
+    //   // clearInterval(interval);
+    //   window.removeEventListener('keyup', handlekeyup);
+    // }
+
     if (isCorrect) {
-      console.log('congrats you win!');
-      setTimeout(() => {
+      // const intervalID = setInterval(() => {
+      //   setShowModal(true);
+      // }, 2000);
+
+      // setLoop(intervalID);
+
+      timer.current = setInterval(() => {
         setShowModal(true);
-      }, 2000);
+      }, DELAY);
+
       window.removeEventListener('keyup', handlekeyup);
     }
 
@@ -38,12 +62,16 @@ const Wordle = ({ solution }: WordleProps) => {
       console.log('you lose!');
       setTimeout(() => {
         setShowModal(true);
-      }, 2000);
+      }, DELAY);
       window.removeEventListener('keyup', handlekeyup);
     }
 
     return () => {
       window.removeEventListener('keyup', handlekeyup);
+      clearInterval(timer.current);
+      window.clearInterval(timer.current);
+      console.log('clenup called');
+      // clearInterval(loop);
     };
   }, [handlekeyup, isCorrect]);
 
@@ -64,11 +92,21 @@ const Wordle = ({ solution }: WordleProps) => {
       {showModal && (
         <Modal
           isCorrect={isCorrect}
+          setIsCorrect={setIsCorrect}
           turn={turn}
+          setTurn={setTurn}
           solution={solution}
           setShowModal={setShowModal}
+          setHistory={setHistory}
+          setCurrentGuess={setCurrentGuess}
+          setGuesses={setGuesses}
+          currentTimer={timer.current}
+          setSolution={setSolution}
         />
       )}
+      {console.log(showModal)}
+      {console.log(currentGuess)}
+      {console.log(guesses)}
     </>
   );
 };

@@ -133,13 +133,17 @@ const useWordle = (solution: string) => {
 
   return {
     turn,
+    setTurn,
     currentGuess,
     setCurrentGuess,
     guesses,
+    setGuesses,
     isCorrect,
+    setIsCorrect,
     usedKeys,
     handlekeyup,
     history,
+    setHistory,
     formatGuess,
     addNewGuess,
   };
