@@ -81,7 +81,8 @@ h1 {
   margin: 20px auto;
 }
 
-.keypad > div {
+.keypad > div,
+.enter {
   margin: 5px;
   width: 40px;
   height: 50px;
@@ -89,6 +90,18 @@ h1 {
   display: inline-block;
   border-radius: 6px;
   line-height: 50px;
+  cursor: pointer;
+}
+
+.enter {
+  width: 100px;
+  height: 50px;
+  background: #5ac85a;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2em;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .keypad > div.green {

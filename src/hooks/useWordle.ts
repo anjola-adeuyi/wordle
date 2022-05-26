@@ -131,7 +131,18 @@ const useWordle = (solution: string) => {
     }
   };
 
-  return { turn, currentGuess, guesses, isCorrect, usedKeys, handlekeyup };
+  return {
+    turn,
+    currentGuess,
+    setCurrentGuess,
+    guesses,
+    isCorrect,
+    usedKeys,
+    handlekeyup,
+    history,
+    formatGuess,
+    addNewGuess,
+  };
 };
 
 export default useWordle;

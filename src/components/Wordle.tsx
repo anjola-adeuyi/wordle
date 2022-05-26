@@ -9,8 +9,18 @@ interface WordleProps {
 }
 
 const Wordle = ({ solution }: WordleProps) => {
-  const { currentGuess, handlekeyup, guesses, isCorrect, turn, usedKeys } =
-    useWordle(solution);
+  const {
+    currentGuess,
+    setCurrentGuess,
+    handlekeyup,
+    guesses,
+    isCorrect,
+    turn,
+    usedKeys,
+    history,
+    formatGuess,
+    addNewGuess,
+  } = useWordle(solution);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -37,16 +47,20 @@ const Wordle = ({ solution }: WordleProps) => {
     };
   }, [handlekeyup, isCorrect]);
 
-  useEffect(() => {
-    console.log(guesses, turn, isCorrect);
-  }, [guesses, turn, isCorrect]);
-
   return (
     <>
       <div>solution - {solution}</div>
       <div>Current guess - {currentGuess}</div>
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
-      <Keypad usedKeys={usedKeys} />
+      <Keypad
+        usedKeys={usedKeys}
+        setCurrentGuess={setCurrentGuess}
+        turn={turn}
+        currentGuess={currentGuess}
+        history={history}
+        formatGuess={formatGuess}
+        addNewGuess={addNewGuess}
+      />
       {showModal && (
         <Modal isCorrect={isCorrect} turn={turn} solution={solution} />
       )}
