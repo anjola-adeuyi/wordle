@@ -1,17 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useWordle from '../hooks/useWordle';
 import Grid from './Grid';
-import Keypad from './Keypad';
+import Keypad, { TLetter } from './Keypad';
 import Modal from './Modal';
 
 interface WordleProps {
   solution: string;
   setSolution: React.Dispatch<React.SetStateAction<string | null>>;
+  letters: TLetter[];
+  setLetters: React.Dispatch<React.SetStateAction<TLetter[]>>;
 }
 
 const DELAY = 2000;
 
-const Wordle = ({ solution, setSolution }: WordleProps) => {
+const Wordle = ({
+  solution,
+  setSolution,
+  letters,
+  setLetters,
+}: WordleProps) => {
   const {
     currentGuess,
     setCurrentGuess,
@@ -81,6 +88,7 @@ const Wordle = ({ solution, setSolution }: WordleProps) => {
       <div>Current guess - {currentGuess}</div>
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
       <Keypad
+        letters={letters}
         usedKeys={usedKeys}
         setCurrentGuess={setCurrentGuess}
         turn={turn}
@@ -102,6 +110,7 @@ const Wordle = ({ solution, setSolution }: WordleProps) => {
           setGuesses={setGuesses}
           currentTimer={timer.current}
           setSolution={setSolution}
+          setLetters={setLetters}
         />
       )}
       {console.log(showModal)}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 interface KeypadProps {
+  letters: TLetter[];
   usedKeys: Record<any, string>;
   setCurrentGuess: React.Dispatch<React.SetStateAction<string>>;
   turn: number;
@@ -16,11 +17,12 @@ interface TFormatGuess {
   color: string;
 }
 
-interface TLetter {
+export interface TLetter {
   key: string;
 }
 
 const Keypad = ({
+  letters,
   usedKeys,
   setCurrentGuess,
   turn,
@@ -29,18 +31,6 @@ const Keypad = ({
   formatGuess,
   addNewGuess,
 }: KeypadProps) => {
-  const [letters, setLetters] = useState<TLetter[]>([]);
-
-  useEffect(() => {
-    // fetch('http://localhost:5000/letters')
-    fetch('https://anjola-adeuyi.github.io/wordle-api/letters.json')
-      .then((res) => res.json())
-      .then((json) => {
-        setLetters(json);
-      });
-    console.log(letters);
-  }, []);
-
   const handleKeyPadClick = (letter: TLetter) => {
     console.log('letter', letter.key);
 
@@ -69,8 +59,6 @@ const Keypad = ({
     const formattedGuess = formatGuess();
     addNewGuess(formattedGuess);
   };
-
-  console.log(letters);
 
   return (
     <>

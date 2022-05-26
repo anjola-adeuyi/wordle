@@ -1,4 +1,5 @@
 import React from 'react';
+import { TLetter } from './Keypad';
 
 interface ModalProps {
   isCorrect: boolean;
@@ -12,6 +13,7 @@ interface ModalProps {
   setGuesses: React.Dispatch<React.SetStateAction<any[]>>;
   currentTimer: NodeJS.Timeout | NodeJS.Timer | undefined;
   setSolution: React.Dispatch<React.SetStateAction<string | null>>;
+  setLetters: React.Dispatch<React.SetStateAction<TLetter[]>>;
 }
 
 const Modal = ({
@@ -26,6 +28,7 @@ const Modal = ({
   setGuesses,
   currentTimer,
   setSolution,
+  setLetters,
 }: ModalProps) => {
   const handleClose = () => {
     setShowModal(false);
@@ -43,6 +46,14 @@ const Modal = ({
         // random int btw 0 & 14
         const randomSolution = json[Math.floor(Math.random() * json.length)];
         setSolution(randomSolution.word);
+        console.log('modal solution called now');
+      });
+
+    fetch('https://anjola-adeuyi.github.io/wordle-api/letters.json')
+      .then((res) => res.json())
+      .then((json) => {
+        setLetters(json);
+        console.log('modal letters called now');
       });
 
     console.log('cleared interval');
