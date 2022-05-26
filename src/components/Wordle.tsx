@@ -30,6 +30,7 @@ const Wordle = ({
     turn,
     setTurn,
     usedKeys,
+    setUsedKeys,
     history,
     setHistory,
     formatGuess,
@@ -111,6 +112,8 @@ const Wordle = ({
           currentTimer={timer.current}
           setSolution={setSolution}
           setLetters={setLetters}
+          usedKeys={usedKeys}
+          setUsedKeys={setUsedKeys}
         />
       )}
       {console.log(showModal)}

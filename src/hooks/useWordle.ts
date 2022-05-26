@@ -141,6 +141,7 @@ const useWordle = (solution: string) => {
     isCorrect,
     setIsCorrect,
     usedKeys,
+    setUsedKeys,
     handlekeyup,
     history,
     setHistory,

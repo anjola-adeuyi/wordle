@@ -14,6 +14,8 @@ interface ModalProps {
   currentTimer: NodeJS.Timeout | NodeJS.Timer | undefined;
   setSolution: React.Dispatch<React.SetStateAction<string | null>>;
   setLetters: React.Dispatch<React.SetStateAction<TLetter[]>>;
+  usedKeys: Record<any, string>;
+  setUsedKeys: React.Dispatch<React.SetStateAction<Record<any, string>>>;
 }
 
 const Modal = ({
@@ -29,6 +31,8 @@ const Modal = ({
   currentTimer,
   setSolution,
   setLetters,
+  usedKeys,
+  setUsedKeys,
 }: ModalProps) => {
   const handleClose = () => {
     setShowModal(false);
@@ -49,12 +53,14 @@ const Modal = ({
         console.log('modal solution called now');
       });
 
-    fetch('https://anjola-adeuyi.github.io/wordle-api/letters.json')
-      .then((res) => res.json())
-      .then((json) => {
-        setLetters(json);
-        console.log('modal letters called now');
-      });
+    setUsedKeys({});
+
+    // fetch('https://anjola-adeuyi.github.io/wordle-api/letters.json')
+    //   .then((res) => res.json())
+    //   .then((json) => {
+    //     setLetters(json);
+    //     console.log('modal letters called now');
+    //   });
 
     console.log('cleared interval');
   };

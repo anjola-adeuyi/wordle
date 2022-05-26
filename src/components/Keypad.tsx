@@ -60,12 +60,16 @@ const Keypad = ({
     addNewGuess(formattedGuess);
   };
 
+  console.log(letters);
+
   return (
     <>
       <div className='keypad'>
         {letters &&
           letters.map((letter) => {
             const color = usedKeys[letter.key];
+            console.log(color);
+            console.log(usedKeys);
             return (
               <div
                 key={letter.key}
