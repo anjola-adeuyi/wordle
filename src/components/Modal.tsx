@@ -37,11 +37,7 @@ const Modal = ({
   const handleClose = () => {
     setShowModal(false);
     setIsCorrect(false);
-    // setCurrentGuess('');
-    // setHistory([]);
     setGuesses([...Array(6)]);
-    // clearInterval(currentTimer);
-    // window.clearInterval(currentTimer);
     setTurn(0);
 
     fetch('https://anjola-adeuyi.github.io/wordle-api/solutions.json')
@@ -55,21 +51,11 @@ const Modal = ({
 
     setUsedKeys({});
 
-    // fetch('https://anjola-adeuyi.github.io/wordle-api/letters.json')
-    //   .then((res) => res.json())
-    //   .then((json) => {
-    //     setLetters(json);
-    //     console.log('modal letters called now');
-    //   });
-
     console.log('cleared interval');
   };
 
   return (
     <div className='modal'>
-      <button className='closeModal' onClick={handleClose}>
-        Play again
-      </button>
       {isCorrect && (
         <div>
           <h1>You win!</h1>
@@ -80,6 +66,9 @@ const Modal = ({
             You found the solution in {turn} {turn <= 1 ? 'guess' : 'guesses'}{' '}
             😀
           </p>
+          <div className='closeModal' onClick={handleClose}>
+            NEXT
+          </div>
         </div>
       )}
       {!isCorrect && (
@@ -89,6 +78,9 @@ const Modal = ({
             The answer is <span className='solution'> {solution}</span>
           </p>
           <p>Better luck next time 🥹 </p>
+          <div className='closeModal fail' onClick={handleClose}>
+            TRY AGAIN
+          </div>
         </div>
       )}
     </div>
